@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/rymiyamoto/affiliate-api/conf"
+	"github.com/rymiyamoto/affiliate-api/dispatch"
 	"github.com/rymiyamoto/affiliate-api/log"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 func init() {
@@ -15,43 +15,31 @@ func init() {
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "affiliate"
-	app.Usage = "アフィリエイト"
-	app.Commands = commands
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Errorf("処理が失敗しました: %v", err)
-		os.Exit(1)
+	app.Name = "affiliate-api-tester"
+	app.Usage = "アフィリエイトAPIの動作確認"
+	app.Version = "1.0.0"
+	app.Flags = []cli.Flag{
+		&cli.StringFlag{
+			Name:    "shop",
+			Usage:   "対象",
+			Value:   "",
+			Aliases: []string{"s"},
+		},
+		&cli.StringFlag{
+			Name:    "code",
+			Usage:   "商品コード",
+			Value:   "",
+			Aliases: []string{"c"},
+		},
 	}
-}
-
-var commands = []cli.Command{
-	{
-		Name:  "rakuten",
-		Usage: "楽天商品検索API",
-		Flags: []cli.Flag{
-			cli.StringFlag{
-				Required: false,
-				Name:     "date,d",
-				Usage:    "基準日 `yyyy-mm-dd` (default today",
-			},
-		},
-		Action: Hoge,
-	},
-	{
-		Name:  "yahoo",
-		Usage: "Yahoo商品検索API",
-		Flags: []cli.Flag{
-			cli.StringFlag{
-				Required: false,
-				Name:     "date,d",
-				Usage:    "基準日 `yyyy-mm-dd` (default today",
-			},
-		},
-		Action: Hoge,
-	},
-}
-
-func Hoge() {
-	fmt.Println("hello world")
+	app.Action = func(c *cli.Context) error {
+		s := dispatch.NewAffiliate()
+		log.Info("start")
+		err := s.Run(c)
+		log.Info("finish")
+		return err
+	}
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 }
