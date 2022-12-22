@@ -15,8 +15,8 @@ func init() {
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "push"
-	app.Usage = "プッシュ通知メッセージを送信します"
+	app.Name = "affiliate"
+	app.Usage = "アフィリエイト"
 	app.Commands = commands
 	err := app.Run(os.Args)
 	if err != nil {
