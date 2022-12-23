@@ -19,6 +19,7 @@ func NewYahoo() IYahoo {
 	return &Yahoo{}
 }
 
+// Exec 実行
 func (u *Yahoo) Exec(f *flag.Affiliate) error {
 	log.Info("yahoo")
 	return nil
