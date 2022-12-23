@@ -48,6 +48,7 @@ func (s *RakutenClient) GetProduct() error {
 	if err != nil {
 		return fmt.Errorf("failed to request rakuten product search. err: %w", err)
 	}
+
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)

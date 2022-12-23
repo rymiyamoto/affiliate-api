@@ -6,7 +6,7 @@ import (
 )
 
 func GetValue(key string) (string, error) {
-	v := os.Getenv("IS_DEV_APP")
+	v := os.Getenv("key")
 
 	if v == "" {
 		return "", fmt.Errorf("not found value. key: %s", key)

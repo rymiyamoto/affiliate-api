@@ -34,12 +34,10 @@ func (d *Affiliate) Run(ctx *cli.Context) error {
 
 	switch f.ShopType {
 	case common.ShopTypeRakuten:
-		d.rakutenUsecase.Exec(f)
+		return d.rakutenUsecase.Exec(f)
 	case common.ShopTypeYahoo:
-		d.yahooUsecase.Exec(f)
+		return d.yahooUsecase.Exec(f)
 	default:
 		return fmt.Errorf("not found shop. f: %+v", f)
 	}
-
-	return nil
 }
