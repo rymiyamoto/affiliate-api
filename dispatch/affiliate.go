@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/rymiyamoto/affiliate-api/flag"
-	"github.com/rymiyamoto/affiliate-api/log"
 	"github.com/rymiyamoto/affiliate-api/model/common"
 	"github.com/rymiyamoto/affiliate-api/usecase"
 	"github.com/urfave/cli/v2"
@@ -31,8 +30,6 @@ func NewAffiliate() IAffiliate {
 
 // Run 本体
 func (d *Affiliate) Run(ctx *cli.Context) error {
-	log.Info("hello world")
-
 	f := flag.NewAffiliate(ctx)
 
 	switch f.ShopType {

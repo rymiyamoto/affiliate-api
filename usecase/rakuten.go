@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"github.com/rymiyamoto/affiliate-api/flag"
-	"github.com/rymiyamoto/affiliate-api/log"
 	"github.com/rymiyamoto/affiliate-api/service"
 )
 
@@ -25,7 +24,6 @@ func NewRakuten() IRakuten {
 
 // Exec 実行
 func (u *Rakuten) Exec(f *flag.Affiliate) error {
-	log.Info("rakuten")
 	if err := u.rakutenClientService.GetProduct(); err != nil {
 		return err
 	}
