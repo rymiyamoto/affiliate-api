@@ -41,6 +41,7 @@ func (s *RakutenClient) GetProduct() error {
 	q := req.URL.Query()
 	q.Add("applicationId", appID)
 	q.Add("productId", "8e27892c206a7118a74445c5a0825a41")
+	req.URL.RawQuery = q.Encode()
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
