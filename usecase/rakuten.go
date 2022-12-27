@@ -1,6 +1,9 @@
 package usecase
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/rymiyamoto/affiliate-api/flag"
 	"github.com/rymiyamoto/affiliate-api/service"
 )
@@ -24,8 +27,12 @@ func NewRakuten() IRakuten {
 
 // Exec 実行
 func (u *Rakuten) Exec(f *flag.Affiliate) error {
-	if err := u.rakutenClientService.GetProduct(); err != nil {
-		return err
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+		if err := u.rakutenClientService.GetProduct(); err != nil {
+			return err
+		}
+		time.Sleep(1 * time.Second)
 	}
 	return nil
 }
