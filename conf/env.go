@@ -1,11 +1,11 @@
-package env
+package conf
 
 import (
 	"fmt"
 	"os"
 )
 
-func GetValue(key string) (string, error) {
+func GetEnv(key string) (string, error) {
 	v := os.Getenv(key)
 
 	if v == "" {

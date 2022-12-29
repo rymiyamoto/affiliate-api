@@ -272,8 +272,6 @@ func (l *Logger) log(level Lvl, msg string) {
 	}
 	fields["message"] = msg
 
-	// MEMO(micheam): JSON フォーマット固定で実装しています。
-	// LTSV など、別のフォーマットに変更する場合は、以下の実装を切り替えてください。
 	b, _ := json.Marshal(fields)
 
 	l.mutex.Lock()

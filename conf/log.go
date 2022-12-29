@@ -1,30 +1,25 @@
 package conf
 
 import (
-	"io"
+	"fmt"
 	"os"
 
 	"github.com/rymiyamoto/affiliate-api/log"
 )
 
-// APILog apiログの出力先
-func APILog() io.Writer {
-	return os.Stdout
-}
-
-// InitLog は、ログ初期化を行う
-func InitLog(logTypeName string) {
+// InitLog ログ初期化
+func InitLog(logTypeName string) error {
 	log.SetTyp(logTypeName)
-	log.SetOutput(APILog())
-	if DebugEnabled() {
+	log.SetOutput(os.Stdout)
+
+	val, err := GetEnv("DEBUG_LOG")
+	if err != nil {
+		return fmt.Errorf("failed to init log. err: %w", err)
+	}
+
+	if val == "enable" {
 		log.SetLevel(log.DEBUG)
 	}
-}
 
-// DebugEnabled DEBUGレベルのログ出力が有効かどうか
-func DebugEnabled() bool {
-	if v := os.Getenv("DEBUG_LOG"); v == "enable" {
-		return true
-	}
-	return false
+	return nil
 }
