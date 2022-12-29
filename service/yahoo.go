@@ -1,4 +1,4 @@
-package usecase
+package service
 
 import (
 	"github.com/rymiyamoto/affiliate-api/flag"
@@ -20,7 +20,7 @@ func NewYahoo() IYahoo {
 }
 
 // Exec 実行
-func (u *Yahoo) Exec(f *flag.Affiliate) error {
+func (s *Yahoo) Exec(f *flag.Affiliate) error {
 	log.Info("yahoo")
 	return nil
 }

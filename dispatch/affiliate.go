@@ -5,7 +5,7 @@ import (
 
 	"github.com/rymiyamoto/affiliate-api/flag"
 	"github.com/rymiyamoto/affiliate-api/model/common"
-	"github.com/rymiyamoto/affiliate-api/usecase"
+	"github.com/rymiyamoto/affiliate-api/service"
 	"github.com/urfave/cli/v2"
 )
 
@@ -15,16 +15,16 @@ type (
 	}
 
 	Affiliate struct {
-		rakutenUsecase usecase.IRakuten
-		yahooUsecase   usecase.IYahoo
+		rakutenService service.IRakuten
+		yahooService   service.IYahoo
 	}
 )
 
 // NewAffiliate initialize
 func NewAffiliate() IAffiliate {
 	return &Affiliate{
-		rakutenUsecase: usecase.NewRakuten(),
-		yahooUsecase:   usecase.NewYahoo(),
+		rakutenService: service.NewRakuten(),
+		yahooService:   service.NewYahoo(),
 	}
 }
 
@@ -34,9 +34,9 @@ func (d *Affiliate) Run(ctx *cli.Context) error {
 
 	switch f.ShopType {
 	case common.ShopTypeRakuten:
-		return d.rakutenUsecase.Exec(f)
+		return d.rakutenService.Exec(f)
 	case common.ShopTypeYahoo:
-		return d.yahooUsecase.Exec(f)
+		return d.yahooService.Exec(f)
 	default:
 		return fmt.Errorf("not found shop. f: %+v", f)
 	}
