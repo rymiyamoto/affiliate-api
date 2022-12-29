@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/rymiyamoto/affiliate-api/conf"
+	"github.com/rymiyamoto/affiliate-api/env"
 )
 
 type (
@@ -33,7 +33,7 @@ func (s *RakutenClient) GetProduct() error {
 		return fmt.Errorf("failed to make rakuten product search request. err: %w", err)
 	}
 
-	appID, err := conf.GetEnv("RAKUTEN_APP_ID")
+	appID, err := env.Value("RAKUTEN_APP_ID")
 	if err != nil {
 		return err
 	}
