@@ -27,6 +27,23 @@ func TestProduct_ByShopType(t *testing.T) {
 
 	t.Run("success case", func(t *testing.T) {
 		t.Parallel()
+
+		exec := func(shop common.ShopType, expect *model.Products) {
+			t.Run(fmt.Sprintf("when shop_type is %d", shop), func(t *testing.T) {
+				t.Parallel()
+
+				ret, err := NewProduct().ByShopType(shop)
+
+				if err != nil {
+					t.Error(fmt.Errorf("expected didn't has error. err: %w", err))
+				}
+
+				if diff := cmp.Diff(ret, expect); diff != "" {
+					t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", expect, ret))
+				}
+			})
+		}
+
 		tests := []struct {
 			shop   common.ShopType
 			expect *model.Products
@@ -80,24 +97,28 @@ func TestProduct_ByShopType(t *testing.T) {
 		}
 
 		for _, test := range tests {
-			t.Run(fmt.Sprintf("when shop_type is %d", test.shop), func(t *testing.T) {
-				t.Parallel()
-
-				ret, err := NewProduct().ByShopType(test.shop)
-
-				if err != nil {
-					t.Error(fmt.Errorf("expected didn't has error. err: %w", err))
-				}
-
-				if diff := cmp.Diff(ret, test.expect); diff != "" {
-					t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", test.expect, ret))
-				}
-			})
+			exec(test.shop, test.expect)
 		}
 	})
 
 	t.Run("fail case", func(t *testing.T) {
 		t.Parallel()
+
+		exec := func(shop common.ShopType, expect error) {
+			t.Run(fmt.Sprintf("when shop_type is %d", shop), func(t *testing.T) {
+				t.Parallel()
+
+				ret, err := NewProduct().ByShopType(shop)
+
+				if ret != nil {
+					t.Error(fmt.Errorf("expected didn't has ret. ret: %+v", ret))
+				}
+
+				if diff := cmp.Diff(err.Error(), expect.Error()); diff != "" {
+					t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", expect, err))
+				}
+			})
+		}
 
 		tests := []struct {
 			shop   common.ShopType
@@ -110,19 +131,7 @@ func TestProduct_ByShopType(t *testing.T) {
 		}
 
 		for _, test := range tests {
-			t.Run(fmt.Sprintf("when shop_type is %d", test.shop), func(t *testing.T) {
-				t.Parallel()
-
-				ret, err := NewProduct().ByShopType(test.shop)
-
-				if ret != nil {
-					t.Error(fmt.Errorf("expected didn't has ret. ret: %+v", ret))
-				}
-
-				if diff := cmp.Diff(err.Error(), test.expect.Error()); diff != "" {
-					t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", test.expect, err))
-				}
-			})
+			exec(test.shop, test.expect)
 		}
 	})
 }
