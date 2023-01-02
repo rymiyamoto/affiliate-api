@@ -5,7 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/rymiyamoto/affiliate-api/env"
+	"github.com/rymiyamoto/affiliate-api/util/env"
+	"github.com/rymiyamoto/affiliate-api/util/log"
 )
 
 type (
@@ -28,6 +29,7 @@ func NewRakutenClient() IRakutenClient {
 
 // GetProduct 商品取得
 func (s *RakutenClient) GetProduct() error {
+	//nolint
 	req, err := http.NewRequest("GET", rakutenProductSearchEndpoint, nil)
 	if err != nil {
 		return fmt.Errorf("failed to make rakuten product search request. err: %w", err)
@@ -45,6 +47,7 @@ func (s *RakutenClient) GetProduct() error {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
+
 	if err != nil {
 		return fmt.Errorf("failed to request rakuten product search. err: %w", err)
 	}
@@ -56,7 +59,7 @@ func (s *RakutenClient) GetProduct() error {
 		return fmt.Errorf("failed to perse response rakuten product search. err: %w", err)
 	}
 
-	fmt.Println(string(body))
+	log.Infof("body: %s", string(body))
 
 	return nil
 }

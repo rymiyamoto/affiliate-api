@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rymiyamoto/affiliate-api/env"
-	"github.com/rymiyamoto/affiliate-api/log"
 	"github.com/rymiyamoto/affiliate-api/model/common"
+	"github.com/rymiyamoto/affiliate-api/util/env"
+	"github.com/rymiyamoto/affiliate-api/util/log"
 )
 
 // InitLog ログ初期化

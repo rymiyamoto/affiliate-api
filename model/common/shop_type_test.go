@@ -8,6 +8,18 @@ import (
 func TestShopType_ToShopType(t *testing.T) {
 	t.Parallel()
 
+	exec := func(shop string, expect ShopType) {
+		t.Run(fmt.Sprintf("when shop is %s", shop), func(t *testing.T) {
+			t.Parallel()
+
+			ret := ToShopType(shop)
+
+			if ret != expect {
+				t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", expect, ret))
+			}
+		})
+	}
+
 	tests := []struct {
 		shop   string
 		expect ShopType
@@ -18,12 +30,6 @@ func TestShopType_ToShopType(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		t.Run(fmt.Sprintf("when shop is %s", test.shop), func(t *testing.T) {
-			ret := ToShopType(test.shop)
-
-			if ret != test.expect {
-				t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", test.expect, ret))
-			}
-		})
+		exec(test.shop, test.expect)
 	}
 }

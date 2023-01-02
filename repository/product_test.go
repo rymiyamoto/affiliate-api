@@ -81,6 +81,8 @@ func TestProduct_ByShopType(t *testing.T) {
 
 		for _, test := range tests {
 			t.Run(fmt.Sprintf("when shop_type is %d", test.shop), func(t *testing.T) {
+				t.Parallel()
+
 				ret, err := NewProduct().ByShopType(test.shop)
 
 				if err != nil {
@@ -109,6 +111,8 @@ func TestProduct_ByShopType(t *testing.T) {
 
 		for _, test := range tests {
 			t.Run(fmt.Sprintf("when shop_type is %d", test.shop), func(t *testing.T) {
+				t.Parallel()
+
 				ret, err := NewProduct().ByShopType(test.shop)
 
 				if ret != nil {
@@ -120,6 +124,5 @@ func TestProduct_ByShopType(t *testing.T) {
 				}
 			})
 		}
-
 	})
 }

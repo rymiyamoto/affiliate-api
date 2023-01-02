@@ -32,11 +32,14 @@ func NewAffiliate() IAffiliate {
 func (d *Affiliate) Run(ctx *cli.Context) error {
 	f := flag.NewAffiliate(ctx)
 
+	//nolint:exhaustive
 	switch f.ShopType {
 	case common.ShopTypeRakuten:
 		return d.rakutenService.Exec(f)
+
 	case common.ShopTypeYahoo:
 		return d.yahooService.Exec(f)
+
 	default:
 		return fmt.Errorf("not found shop. f: %+v", f)
 	}

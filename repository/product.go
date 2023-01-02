@@ -26,48 +26,49 @@ func NewProduct() IProduct {
 func (r *Product) ByShopType(shop common.ShopType) (*model.Products, error) {
 	ms := model.Products{}
 
+	//nolint:exhaustive
 	switch shop {
 	case common.ShopTypeRakuten:
 		products := model.Products{
 			{
-				ID:       10,
+				ID:       10, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
 				Code:     "",
-				Price:    8000,
+				Price:    8000, //nolint:gomnd
 			},
 			{
-				ID:       11,
+				ID:       11, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
 				Code:     "",
-				Price:    5000,
+				Price:    5000, //nolint:gomnd
 			},
 			{
-				ID:       12,
+				ID:       12, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
 				Code:     "",
-				Price:    300,
+				Price:    300, //nolint:gomnd
 			},
 		}
 		ms = append(ms, products...)
 	case common.ShopTypeYahoo:
 		products := model.Products{
 			{
-				ID:       20,
+				ID:       20, //nolint:gomnd
 				ShopType: common.ShopTypeYahoo,
 				Code:     "",
-				Price:    7000,
+				Price:    7000, //nolint:gomnd
 			},
 			{
-				ID:       21,
+				ID:       21, //nolint:gomnd
 				ShopType: common.ShopTypeYahoo,
 				Code:     "",
-				Price:    4000,
+				Price:    4000, //nolint:gomnd
 			},
 			{
-				ID:       22,
+				ID:       22, //nolint:gomnd
 				ShopType: common.ShopTypeYahoo,
 				Code:     "",
-				Price:    500,
+				Price:    500, //nolint:gomnd
 			},
 		}
 		ms = append(ms, products...)

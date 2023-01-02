@@ -5,15 +5,15 @@ import (
 
 	"github.com/rymiyamoto/affiliate-api/conf"
 	"github.com/rymiyamoto/affiliate-api/dispatch"
-	"github.com/rymiyamoto/affiliate-api/log"
+	"github.com/rymiyamoto/affiliate-api/util/log"
 	"github.com/urfave/cli/v2"
 )
 
-func init() {
-	conf.InitLog("SCRIPTS")
-}
-
 func main() {
+	if err := conf.InitLog("SCRIPTS"); err != nil {
+		panic(err)
+	}
+
 	app := cli.NewApp()
 	app.Name = "affiliate-api-tester"
 	app.Usage = "アフィリエイトAPIの動作確認"
@@ -34,11 +34,16 @@ func main() {
 	}
 	app.Action = func(c *cli.Context) error {
 		s := dispatch.NewAffiliate()
+
 		log.Info("start")
+
 		err := s.Run(c)
+
 		log.Info("finish")
+
 		return err
 	}
+
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}

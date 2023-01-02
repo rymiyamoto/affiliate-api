@@ -1,11 +1,11 @@
 package service
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/rymiyamoto/affiliate-api/flag"
 	"github.com/rymiyamoto/affiliate-api/repository"
+	"github.com/rymiyamoto/affiliate-api/util/log"
 )
 
 type (
@@ -28,11 +28,14 @@ func NewRakuten() IRakuten {
 // Exec 実行
 func (s *Rakuten) Exec(f *flag.Affiliate) error {
 	for i := 0; i < 10; i++ {
-		fmt.Println(i)
+		log.Infof("count: %d", i)
+
 		if err := s.rakutenClientRepository.GetProduct(); err != nil {
 			return err
 		}
+
 		time.Sleep(1 * time.Second)
 	}
+
 	return nil
 }

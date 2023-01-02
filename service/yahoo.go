@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/rymiyamoto/affiliate-api/flag"
-	"github.com/rymiyamoto/affiliate-api/log"
+	"github.com/rymiyamoto/affiliate-api/util/log"
 )
 
 type (
@@ -22,5 +22,6 @@ func NewYahoo() IYahoo {
 // Exec 実行
 func (s *Yahoo) Exec(f *flag.Affiliate) error {
 	log.Info("yahoo")
+
 	return nil
 }
