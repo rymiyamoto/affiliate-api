@@ -60,19 +60,19 @@ func TestProduct_ByShopType(t *testing.T) {
 					{
 						ID:       20,
 						ShopType: common.ShopTypeYahoo,
-						Code:     "",
+						Code:     "4949776441067",
 						Price:    7000,
 					},
 					{
 						ID:       21,
 						ShopType: common.ShopTypeYahoo,
-						Code:     "",
+						Code:     "4949776342067",
 						Price:    4000,
 					},
 					{
 						ID:       22,
 						ShopType: common.ShopTypeYahoo,
-						Code:     "",
+						Code:     "4948872325134",
 						Price:    500,
 					},
 				},
