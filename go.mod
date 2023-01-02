@@ -9,7 +9,6 @@ require (
 	github.com/google/go-cmp v0.5.9
 	github.com/stretchr/testify v1.7.0
 	github.com/urfave/cli/v2 v2.23.7
-	google.golang.org/protobuf v1.28.1
 )
 
 require (
