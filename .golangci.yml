@@ -1,0 +1,39 @@
+run:
+  skip-dirs:
+    - src/external_libs
+  skip-files:
+    - ".*\\.my\\.go$"
+    - lib/bad.go
+
+linters-settings:
+  varnamelen:
+    max-distance: 5
+    min-name-length: 1
+  tagliatelle:
+    case:
+      rules:
+        json: snake
+
+linters:
+  enable-all: true
+  disable:
+    - maligned
+    - prealloc
+    - scopelint
+    - interfacer
+    - golint
+    - wrapcheck
+    - godot
+    - exhaustivestruct
+    - ireturn
+    - testpackage
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
+        - dupl
+        - gosec
+        - staticcheck
+        - wrapcheck
