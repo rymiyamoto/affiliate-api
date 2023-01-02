@@ -1,9 +1,8 @@
 package common
 
 import (
+	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestShopType_ToShopType(t *testing.T) {
@@ -19,6 +18,12 @@ func TestShopType_ToShopType(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		assert.Equal(t, ToShopType(test.shop), test.expect)
+		t.Run(fmt.Sprintf("when shop is %s", test.shop), func(t *testing.T) {
+			ret := ToShopType(test.shop)
+
+			if ret != test.expect {
+				t.Error(fmt.Errorf("expected same value. expect: %+v, actual: %+v", test.expect, ret))
+			}
+		})
 	}
 }
