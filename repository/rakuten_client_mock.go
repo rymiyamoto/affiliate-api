@@ -34,15 +34,15 @@ func (m *MockIRakutenClient) EXPECT() *MockIRakutenClientMockRecorder {
 }
 
 // GetProduct mocks base method.
-func (m *MockIRakutenClient) GetProduct() error {
+func (m *MockIRakutenClient) GetProduct(code string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetProduct")
+	ret := m.ctrl.Call(m, "GetProduct", code)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // GetProduct indicates an expected call of GetProduct.
-func (mr *MockIRakutenClientMockRecorder) GetProduct() *gomock.Call {
+func (mr *MockIRakutenClientMockRecorder) GetProduct(code interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProduct", reflect.TypeOf((*MockIRakutenClient)(nil).GetProduct))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProduct", reflect.TypeOf((*MockIRakutenClient)(nil).GetProduct), code)
 }

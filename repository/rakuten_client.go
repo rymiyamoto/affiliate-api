@@ -11,7 +11,7 @@ import (
 
 type (
 	IRakutenClient interface {
-		GetProduct() error
+		GetProduct(code string) error
 	}
 
 	RakutenClient struct {
@@ -28,7 +28,7 @@ func NewRakutenClient() IRakutenClient {
 }
 
 // GetProduct 商品取得
-func (s *RakutenClient) GetProduct() error {
+func (s *RakutenClient) GetProduct(code string) error {
 	//nolint
 	req, err := http.NewRequest("GET", rakutenProductSearchEndpoint, nil)
 	if err != nil {
@@ -42,7 +42,7 @@ func (s *RakutenClient) GetProduct() error {
 
 	q := req.URL.Query()
 	q.Add("applicationId", appID)
-	q.Add("productId", "8e27892c206a7118a74445c5a0825a41")
+	q.Add("productId", code)
 	req.URL.RawQuery = q.Encode()
 
 	client := &http.Client{}

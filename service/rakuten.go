@@ -5,7 +5,6 @@ import (
 
 	"github.com/rymiyamoto/affiliate-api/flag"
 	"github.com/rymiyamoto/affiliate-api/repository"
-	"github.com/rymiyamoto/affiliate-api/util/log"
 )
 
 type (
@@ -14,6 +13,7 @@ type (
 	}
 
 	Rakuten struct {
+		productRepository       repository.IProduct
 		rakutenClientRepository repository.IRakutenClient
 	}
 )
@@ -21,16 +21,20 @@ type (
 // NewRakuten initialize
 func NewRakuten() IRakuten {
 	return &Rakuten{
+		productRepository:       repository.NewProduct(),
 		rakutenClientRepository: repository.NewRakutenClient(),
 	}
 }
 
 // Exec 実行
 func (s *Rakuten) Exec(f *flag.Affiliate) error {
-	for i := 0; i < 10; i++ {
-		log.Infof("count: %d", i)
+	products, err := s.productRepository.ByShopType(f.ShopType)
+	if err != nil {
+		return err
+	}
 
-		if err := s.rakutenClientRepository.GetProduct(); err != nil {
+	for _, v := range *products {
+		if err := s.rakutenClientRepository.GetProduct(v.Code); err != nil {
 			return err
 		}
 
