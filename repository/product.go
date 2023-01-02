@@ -33,19 +33,19 @@ func (r *Product) ByShopType(shop common.ShopType) (*model.Products, error) {
 			{
 				ID:       10, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
-				Code:     "",
+				Code:     "8e27892c206a7118a74445c5a0825a41",
 				Price:    8000, //nolint:gomnd
 			},
 			{
 				ID:       11, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
-				Code:     "",
+				Code:     "a3da4c917cdfdbce5577f6923533f003",
 				Price:    5000, //nolint:gomnd
 			},
 			{
 				ID:       12, //nolint:gomnd
 				ShopType: common.ShopTypeRakuten,
-				Code:     "",
+				Code:     "1c3d37510cfe620aa200862886a6502c",
 				Price:    300, //nolint:gomnd
 			},
 		}
